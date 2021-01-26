@@ -1,23 +1,16 @@
 #ifndef __MIME_STREAMS_HPP_INCLUDED__
 #define __MIME_STREAMS_HPP_INCLUDED__
 
-
 #include <gmime/gmime.h>
 #include <safe_epdf_object.hpp>
 #include <string>
 
-
 namespace epdfcrypt {
-
 
 class mime_stream : private safe_epdf_object {
 
 public:
-    enum seek_pos {
-        SET,
-        CUR,
-        END
-    };
+    enum seek_pos { SET, CUR, END };
 
 public:
     mime_stream();
@@ -40,9 +33,8 @@ private:
     mime_stream& operator=(const mime_stream&);
 
 protected:
-    GMimeStream *stream_;
+    GMimeStream* stream_;
 };
-
 
 class mime_stream_filter : private safe_epdf_object {
 
@@ -58,9 +50,8 @@ private:
     mime_stream_filter& operator=(const mime_stream_filter&);
 
 protected:
-    GMimeFilter *filter_;
+    GMimeFilter* filter_;
 };
-
 
 class memory_mime_stream : public mime_stream {
 
@@ -72,7 +63,6 @@ public:
 public:
     std::string content() const;
 };
-
 
 class file_mime_stream : public mime_stream {
 
@@ -88,7 +78,6 @@ private:
     std::string filename_;
 };
 
-
 class filtered_mime_stream : public mime_stream {
 
 public:
@@ -99,7 +88,6 @@ public:
     void add_filter(mime_stream_filter& filter);
 };
 
-
 class base64_mime_stream_filter : public mime_stream_filter {
 
 public:
@@ -107,22 +95,6 @@ public:
     ~base64_mime_stream_filter();
 };
 
-
 }
 
-
 #endif // __MIME_STREAMS_HPP_INCLUDED__
-
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 4
-  tab-width: 4
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: nil
-  End:
-*/
-
-// vim:shiftwidth=4:autoindent:tabstop=4:expandtab:softtabstop=4

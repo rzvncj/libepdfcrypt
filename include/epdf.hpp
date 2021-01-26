@@ -1,11 +1,9 @@
 #ifndef __EPDF_HPP_INCLUDED__
 #define __EPDF_HPP_INCLUDED__
 
-
 #include <hpdf.h>
 #include <safe_epdf_object.hpp>
 #include <string>
-
 
 namespace epdfcrypt {
 
@@ -14,32 +12,28 @@ class mime_stream;
 class epdf : private safe_epdf_object {
 
 public:
-    epdf(const std::string& utf8_font_filename,
-         bool embed_utf8_font = true,
-         float font_size = 10.0, float margin = 10.0);
+    epdf(const std::string& utf8_font_filename, bool embed_utf8_font = true, float font_size = 10.0,
+         float margin = 10.0);
 
     ~epdf();
 
 public:
-    void attach(const std::string& filename);
-    void set_password(const std::string& password);
-    void add_text(const std::string& text);
-    void write(const std::string& filename, bool base64 = false);
+    void        attach(const std::string& filename);
+    void        set_password(const std::string& password);
+    void        add_text(const std::string& text);
+    void        write(const std::string& filename, bool base64 = false);
     std::string base64();
-    size_t size();
+    size_t      size();
 
 private:
     epdf(const epdf&);
     epdf& operator=(const epdf&);
 
 private:
-    void write_base64(mime_stream& output);
-    std::string charset_setup(const std::string& icu_charset,
-                              const std::string& text);
-    void add_line(const std::string& line);
-    static void error_handler(HPDF_STATUS error_no,
-                              HPDF_STATUS detail_no,
-                              void *user_data);
+    void        write_base64(mime_stream& output);
+    std::string charset_setup(const std::string& icu_charset, const std::string& text);
+    void        add_line(const std::string& line);
+    static void error_handler(HPDF_STATUS error_no, HPDF_STATUS detail_no, void* user_data);
 
 private:
     float       font_size_;
@@ -51,21 +45,6 @@ private:
     bool        embed_utf8_font_;
 };
 
-
 }
 
-
 #endif // __EPDF_HPP_INCLUDED__
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 4
-  tab-width: 4
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: nil
-  End:
-*/
-
-// vim:shiftwidth=4:autoindent:tabstop=4:expandtab:softtabstop=4

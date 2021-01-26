@@ -1,66 +1,42 @@
 #include "charset_detector.hpp"
 #include <stdexcept>
 
-
 namespace epdfcrypt {
 
-
-charset_detector::charset_detector()
-    : detector_(0)
+charset_detector::charset_detector() : detector_(0)
 {
     UErrorCode status = U_ZERO_ERROR;
-    detector_ = ucsdet_open(&status);
+    detector_         = ucsdet_open(&status);
 
-    if(!detector_ || U_FAILURE(status))
+    if (!detector_ || U_FAILURE(status))
         throw std::runtime_error("could not create charset detector");
 }
-
 
 charset_detector::~charset_detector()
 {
     ucsdet_close(detector_);
 }
 
-
 std::string charset_detector::charset(const std::string& text)
 {
     UErrorCode status = U_ZERO_ERROR;
 
-    ucsdet_setText(detector_, text.c_str(),
-                   static_cast<int32_t>(text.length()),
-                   &status);
+    ucsdet_setText(detector_, text.c_str(), static_cast<int32_t>(text.length()), &status);
 
-    if(U_FAILURE(status))
+    if (U_FAILURE(status))
         return std::string();
 
-    const UCharsetMatch *match =
-        ucsdet_detect(detector_, &status);
+    const UCharsetMatch* match = ucsdet_detect(detector_, &status);
 
-    if(U_FAILURE(status) || !match)
+    if (U_FAILURE(status) || !match)
         return std::string();
 
-    const char* detected_charset =
-        ucsdet_getName(match, &status);
+    const char* detected_charset = ucsdet_getName(match, &status);
 
-    if(!detected_charset)
+    if (!detected_charset)
         return std::string();
 
     return detected_charset;
 }
 
-
 } // namespace epdfcrypt
-
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 4
-  tab-width: 4
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: nil
-  End:
-*/
-
-// vim:shiftwidth=4:autoindent:tabstop=4:expandtab:softtabstop=4

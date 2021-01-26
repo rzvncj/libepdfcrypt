@@ -5,10 +5,8 @@
 #include <mime_unpacker.hpp>
 #include <stdexcept>
 
-
 using namespace epdfcrypt;
 using namespace std;
-
 
 void print_help(const string& program_name)
 {
@@ -21,30 +19,23 @@ void print_help(const string& program_name)
          << flush;
 }
 
-
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     try {
 
-        const char* const short_options = "hi:o:p:ib";
-        const struct option long_options[] = {
-            { "help",      0, NULL, 'h' },
-            { "output",    1, NULL, 'o' },
-            { "input",     1, NULL, 'i' },
-            { "password",  1, NULL, 'p' },
-            { "base64",    0, NULL, 'p' },
-            { NULL,        0, NULL,  0  }
-        };
+        const char* const   short_options = "hi:o:p:ib";
+        const struct option long_options[]
+            = {{"help", 0, NULL, 'h'},     {"output", 1, NULL, 'o'}, {"input", 1, NULL, 'i'},
+               {"password", 1, NULL, 'p'}, {"base64", 0, NULL, 'p'}, {NULL, 0, NULL, 0}};
 
         string password, input_filename, output_filename;
-        bool base64 = false;
-        int next_option;
+        bool   base64 = false;
+        int    next_option;
 
         do {
 
-            next_option = getopt_long(argc, argv, short_options,
-                                      long_options, NULL);
-            switch(next_option) {
+            next_option = getopt_long(argc, argv, short_options, long_options, NULL);
+            switch (next_option) {
 
             case 'o':
                 output_filename = optarg;
@@ -72,9 +63,9 @@ int main(int argc, char **argv)
                 return 0;
             }
 
-        } while(next_option != -1);
+        } while (next_option != -1);
 
-        if(output_filename.empty() || input_filename.empty()) {
+        if (output_filename.empty() || input_filename.empty()) {
             print_help(argv[0]);
             return 0;
         }
@@ -82,14 +73,14 @@ int main(int argc, char **argv)
         // Begin actual example
 
         file_mime_stream stream(input_filename);
-        mime_unpacker unpacker(stream, true);
+        mime_unpacker    unpacker(stream, true);
 
         unpacker.unpack();
         string body_text = unpacker.body_text();
 
         epdf pdf("/usr/share/fonts/TTF/DroidSans.ttf");
 
-        if(!password.empty())
+        if (!password.empty())
             pdf.set_password(password);
 
         pdf.add_text(body_text);
@@ -115,28 +106,14 @@ int main(int argc, char **argv)
 
         pdf.write(output_filename, base64);
 
-    } catch(const exception& e) {
+    } catch (const exception& e) {
         cerr << "ERROR: " << e.what() << "\n";
         return 1;
 
-    } catch(...) {
+    } catch (...) {
         cerr << "ERROR\n";
         return 1;
     }
 
     return 0;
 }
-
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 4
-  tab-width: 4
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: nil
-  End:
-*/
-
-// vim:shiftwidth=4:autoindent:tabstop=4:expandtab:softtabstop=4
