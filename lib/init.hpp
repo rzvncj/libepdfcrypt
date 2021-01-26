@@ -9,9 +9,6 @@ class sys_initializer {
 public:
     // Init
     sys_initializer();
-
-    // Cleanup
-    ~sys_initializer();
 };
 
 }

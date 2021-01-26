@@ -9,8 +9,4 @@ sys_initializer::sys_initializer()
     g_mime_init(0);
 }
 
-sys_initializer::~sys_initializer()
-{
-}
-
 } // namespace epdfcrypt
