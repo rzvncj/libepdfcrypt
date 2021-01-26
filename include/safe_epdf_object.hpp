@@ -3,15 +3,14 @@
 
 namespace epdfcrypt {
 
-// Base class for all classes that call at least one
-// GMIME or PoDoFo function
+// Base class for all classes that call at least one GMIME or haru function.
 class safe_epdf_object {
 
 public:
     safe_epdf_object();
 
     // Base class, virtual destructor
-    virtual ~safe_epdf_object();
+    virtual ~safe_epdf_object() = default;
 };
 
 }
