@@ -12,12 +12,11 @@ public:
     charset_detector();
     ~charset_detector();
 
+    charset_detector(const charset_detector&) = delete;
+    charset_detector& operator=(const charset_detector&) = delete;
+
 public:
     std::string charset(const std::string& text);
-
-private:
-    charset_detector(const charset_detector&);
-    charset_detector& operator=(const charset_detector&);
 
 private:
     UCharsetDetector* detector_;

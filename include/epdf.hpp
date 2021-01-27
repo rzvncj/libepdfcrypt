@@ -17,6 +17,9 @@ public:
 
     ~epdf();
 
+    epdf(const epdf&) = delete;
+    epdf& operator=(const epdf&) = delete;
+
 public:
     void        attach(const std::string& filename);
     void        set_password(const std::string& password);
@@ -24,10 +27,6 @@ public:
     void        write(const std::string& filename, bool base64 = false);
     std::string base64();
     size_t      size();
-
-private:
-    epdf(const epdf&);
-    epdf& operator=(const epdf&);
 
 private:
     void        write_base64(mime_stream& output);

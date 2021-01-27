@@ -15,12 +15,11 @@ public:
     mime_parser(const mime_stream& stream);
     ~mime_parser();
 
+    mime_parser(const mime_parser&) = delete;
+    mime_parser& operator=(const mime_parser&) = delete;
+
 public:
     GMimeMessage* parse() const;
-
-private:
-    mime_parser(const mime_parser&);
-    mime_parser& operator=(const mime_parser&);
 
 protected:
     GMimeParser* parser_;

@@ -16,6 +16,9 @@ public:
     mime_stream();
     virtual ~mime_stream();
 
+    mime_stream(const mime_stream&) = delete;
+    mime_stream& operator=(const mime_stream&) = delete;
+
 public:
     GMimeStream* stream() const;
 
@@ -27,10 +30,6 @@ public:
     void cat(const mime_stream& from);
 
     std::string content() const;
-
-private:
-    mime_stream(const mime_stream&);
-    mime_stream& operator=(const mime_stream&);
 
 protected:
     GMimeStream* stream_;

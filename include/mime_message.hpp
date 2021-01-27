@@ -14,13 +14,12 @@ public:
     mime_message(GMimeMessage* message);
     ~mime_message();
 
+    mime_message(const mime_message&) = delete;
+    mime_message& operator=(const mime_message&) = delete;
+
 public:
     GMimeMessage* message() const;
     std::string   body_text() const;
-
-private:
-    mime_message(const mime_message&);
-    mime_message& operator=(const mime_message&);
 
 private:
     static bool        part_is_textual(GMimeObject* mime_part);

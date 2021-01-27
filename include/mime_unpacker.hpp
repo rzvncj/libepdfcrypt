@@ -17,6 +17,9 @@ public:
     mime_unpacker(const mime_stream& stream, bool keep_parts = false);
     ~mime_unpacker();
 
+    mime_unpacker(const mime_unpacker&) = delete;
+    mime_unpacker& operator=(const mime_unpacker&) = delete;
+
 public:
     void               unpack();
     const parts_t&     parts() const;
@@ -24,10 +27,6 @@ public:
 
 private:
     static void extract_foreach_callback(GMimeObject* parent, GMimeObject* part, gpointer user_data);
-
-private:
-    mime_unpacker(const mime_unpacker&);
-    mime_unpacker& operator=(const mime_unpacker&);
 
 private:
     bool        keep_parts_;
