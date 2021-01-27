@@ -1,5 +1,4 @@
 #include "charset_detector.hpp"
-#include <boost/algorithm/string.hpp>
 #include <boost/locale.hpp>
 #include <cstring>
 #include <epdf.hpp>
