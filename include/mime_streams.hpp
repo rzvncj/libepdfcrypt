@@ -38,18 +38,17 @@ protected:
 class mime_stream_filter : private safe_epdf_object {
 
 public:
-    mime_stream_filter();
-    virtual ~mime_stream_filter();
+    mime_stream_filter()          = default;
+    virtual ~mime_stream_filter() = default;
+
+    mime_stream_filter(const mime_stream_filter&) = delete;
+    mime_stream_filter& operator=(const mime_stream_filter&) = delete;
 
 public:
     GMimeFilter* filter() const;
 
-private:
-    mime_stream_filter(const mime_stream_filter&);
-    mime_stream_filter& operator=(const mime_stream_filter&);
-
 protected:
-    GMimeFilter* filter_;
+    GMimeFilter* filter_ {nullptr};
 };
 
 class memory_mime_stream : public mime_stream {
