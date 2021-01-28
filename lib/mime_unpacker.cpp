@@ -21,8 +21,8 @@ mime_unpacker::mime_unpacker(const mime_stream& stream, bool keep_parts)
 mime_unpacker::~mime_unpacker()
 {
     if (!keep_parts_) {
-        for (size_t i = 0; i < parts_.size(); ++i)
-            remove(parts_[i].c_str());
+        for (auto&& part : parts_)
+            remove(part.c_str());
 
         if (!tmp_dir_.empty())
             remove(tmp_dir_.c_str());
