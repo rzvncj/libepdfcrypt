@@ -14,9 +14,8 @@ file_mime_stream::file_mime_stream(const std::string& filename) : filename_(file
     int fd = open(filename.c_str(), O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 
     if (fd == -1)
-        throw std::runtime_error(std::string("file mime stream creation failed: "
-                                             "cannot open file: ")
-                                 + filename + ", reason: " + g_strerror(errno));
+        throw std::runtime_error("file mime stream creation failed: cannot open file: " + filename
+                                 + ", reason: " + g_strerror(errno));
 
     stream_ = g_mime_stream_fs_new(fd);
 
