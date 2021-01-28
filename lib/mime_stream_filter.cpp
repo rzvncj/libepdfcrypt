@@ -4,7 +4,7 @@
 
 namespace epdfcrypt {
 
-mime_stream_filter::mime_stream_filter() : filter_(NULL)
+mime_stream_filter::mime_stream_filter() : filter_(nullptr)
 {
 }
 

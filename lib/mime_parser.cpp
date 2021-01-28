@@ -4,7 +4,7 @@
 
 namespace epdfcrypt {
 
-mime_parser::mime_parser(const mime_stream& input) : parser_(NULL)
+mime_parser::mime_parser(const mime_stream& input) : parser_(nullptr)
 {
     input.seek(0, mime_stream::SET);
     parser_ = g_mime_parser_new_with_stream(input.stream());

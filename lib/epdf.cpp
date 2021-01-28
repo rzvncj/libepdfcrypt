@@ -12,10 +12,10 @@
 namespace epdfcrypt {
 
 epdf::epdf(const std::string& utf8_font_filename, bool embed_utf8_font, float font_size, float margin)
-    : font_size_(font_size), margin_(margin), document_(NULL), font_(NULL), current_page_(NULL),
+    : font_size_(font_size), margin_(margin), document_(nullptr), font_(nullptr), current_page_(nullptr),
       utf8_font_filename_(utf8_font_filename), embed_utf8_font_(embed_utf8_font)
 {
-    document_ = HPDF_New(error_handler, NULL);
+    document_ = HPDF_New(error_handler, nullptr);
 
     HPDF_SetCompressionMode(document_, HPDF_COMP_ALL);
     HPDF_SetPageMode(document_, HPDF_PAGE_MODE_USE_NONE);
@@ -99,11 +99,11 @@ void epdf::add_line(const std::string& line)
         if (!line.empty()) {
 
             len = HPDF_Page_MeasureText(current_page_, output_text.c_str(), HPDF_Page_GetWidth(current_page_) - 20,
-                                        HPDF_TRUE, NULL);
+                                        HPDF_TRUE, nullptr);
 
             if (!len)
                 len = HPDF_Page_MeasureText(current_page_, output_text.c_str(), HPDF_Page_GetWidth(current_page_) - 20,
-                                            HPDF_FALSE, NULL);
+                                            HPDF_FALSE, nullptr);
 
             std::string real_line = output_text.substr(0, len);
             HPDF_Page_ShowText(current_page_, real_line.c_str());

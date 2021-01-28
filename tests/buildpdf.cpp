@@ -25,16 +25,15 @@ int main(int argc, char** argv)
 
         const char* const   short_options = "hi:o:p:ib";
         const struct option long_options[]
-            = {{"help", 0, NULL, 'h'},     {"output", 1, NULL, 'o'}, {"input", 1, NULL, 'i'},
-               {"password", 1, NULL, 'p'}, {"base64", 0, NULL, 'p'}, {NULL, 0, NULL, 0}};
+            = {{"help", 0, nullptr, 'h'},     {"output", 1, nullptr, 'o'}, {"input", 1, nullptr, 'i'},
+               {"password", 1, nullptr, 'p'}, {"base64", 0, nullptr, 'p'}, {nullptr, 0, nullptr, 0}};
 
         string password, input_filename, output_filename;
         bool   base64 = false;
         int    next_option;
 
         do {
-
-            next_option = getopt_long(argc, argv, short_options, long_options, NULL);
+            next_option = getopt_long(argc, argv, short_options, long_options, nullptr);
             switch (next_option) {
 
             case 'o':

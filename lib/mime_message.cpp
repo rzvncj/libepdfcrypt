@@ -3,7 +3,7 @@
 
 namespace epdfcrypt {
 
-mime_message::mime_message() : message_(NULL)
+mime_message::mime_message() : message_(nullptr)
 {
     message_ = g_mime_message_new(TRUE);
 }
@@ -31,7 +31,7 @@ std::string mime_message::body_text() const
     if (GMIME_IS_MULTIPART(part)) {
         GMimeMultipart* multipart = reinterpret_cast<GMimeMultipart*>(part);
 
-        part      = NULL;
+        part      = nullptr;
         int count = g_mime_multipart_get_count(multipart);
 
         for (int i = 0; i < count; ++i) {

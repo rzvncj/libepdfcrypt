@@ -95,7 +95,7 @@ void mime_unpacker::extract_foreach_callback(GMimeObject*, GMimeObject* part, gp
         std::stringstream path_ss;
         path_ss << unpacker->tmp_dir_ << "/";
 
-        if (filename == NULL)
+        if (!filename)
             path_ss << "part" << unpacker->part_index_++ << ".bin";
         else {
             std::string fn(filename);
