@@ -52,40 +52,31 @@ const std::string& mime_unpacker::body_text() const
 
 void mime_unpacker::extract_foreach_callback(GMimeObject*, GMimeObject* part, gpointer user_data)
 {
-    /* 'part' points to the current part node that
-     * g_mime_message_foreach() is iterating over */
+    // 'part' points to the current part node that g_mime_message_foreach() is iterating over.
 
-    /* find out what class 'part' is... */
+    // Find out what class 'part' is...
     if (GMIME_IS_MESSAGE_PART(part)) {
-        /* message/rfc822 or message/news */
+        // message/rfc822 or message/news.
 
-        /* g_mime_message_foreach() won't descend into
-           child message parts, so if we want to count any
-           subparts of this child message, we'll have to call
-           g_mime_message_foreach() again here. */
+        // g_mime_message_foreach() won't descend into child message parts, so if we want to count
+        // any subparts of this child message, we'll have to call g_mime_message_foreach() again here.
 
         GMimeMessage* message = g_mime_message_part_get_message(reinterpret_cast<GMimeMessagePart*>(part));
 
         g_mime_message_foreach(message, extract_foreach_callback, user_data);
 
     } else if (GMIME_IS_MESSAGE_PARTIAL(part)) {
-        /* message/partial */
+        // message/partial.
 
-        /* this is an incomplete message part, probably a
-           large message that the sender has broken into
-           smaller parts and is sending us bit by bit. we
-           could save some info about it so that we could
-           piece this back together again once we get all the
-           parts? */
+        // This is an incomplete message part, probably a large message that the sender has broken into
+        // smaller parts sent to us bit by bit. We could save some info about it so that we could
+        // piece this back together again once we get all the parts?
 
     } else if (GMIME_IS_MULTIPART(part)) {
-        /* multipart/mixed, multipart/alternative,
-         * multipart/related, multipart/signed,
-         * multipart/encrypted, etc... */
+        // multipart/mixed, multipart/alternative, multipart/related, multipart/signed, multipart/encrypted, etc.
 
     } else if (GMIME_IS_PART(part)) {
-        /* a normal leaf part, could be text/plain or
-         * image/jpeg etc */
+        // A standard leaf part, could be text/plain, image/jpeg, etc.
 
         GMimePart*     mime_part = reinterpret_cast<GMimePart*>(part);
         mime_unpacker* unpacker  = reinterpret_cast<mime_unpacker*>(user_data);
@@ -97,13 +88,8 @@ void mime_unpacker::extract_foreach_callback(GMimeObject*, GMimeObject* part, gp
 
         if (!filename)
             path_ss << "part" << unpacker->part_index_++ << ".bin";
-        else {
-            std::string fn(filename);
-            int         last_index = fn.find_last_of(".");
-
+        else
             path_ss << filename;
-            // path_ss << fn.substr(0, last_index) << ".bin";
-        }
 
         file_mime_stream output(path_ss.str());
 
