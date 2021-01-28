@@ -83,21 +83,20 @@ void mime_unpacker::extract_foreach_callback(GMimeObject*, GMimeObject* part, gp
 
         const char* filename = g_mime_part_get_filename(mime_part);
 
-        std::stringstream path_ss;
-        path_ss << unpacker->tmp_dir_ << "/";
+        std::string path {unpacker->tmp_dir_ + "/"};
 
         if (!filename)
-            path_ss << "part" << unpacker->part_index_++ << ".bin";
+            path += "part" + std::to_string(unpacker->part_index_++) + ".bin";
         else
-            path_ss << filename;
+            path += filename;
 
-        file_mime_stream output(path_ss.str());
+        file_mime_stream output(path);
 
         GMimeDataWrapper* content = g_mime_part_get_content_object(mime_part);
         g_mime_data_wrapper_write_to_stream(content, output.stream());
         g_mime_stream_flush(output.stream());
 
-        unpacker->parts_.push_back(path_ss.str());
+        unpacker->parts_.push_back(path);
 
     } else {
         g_assert_not_reached();
