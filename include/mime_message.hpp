@@ -26,7 +26,7 @@ private:
     static std::string charset(GMimeObject* mime_part);
 
 protected:
-    GMimeMessage* message_;
+    GMimeMessage* message_ {nullptr};
 };
 
 }

@@ -3,7 +3,7 @@
 
 namespace epdfcrypt {
 
-mime_message::mime_message() : message_(nullptr)
+mime_message::mime_message()
 {
     message_ = g_mime_message_new(TRUE);
 }
