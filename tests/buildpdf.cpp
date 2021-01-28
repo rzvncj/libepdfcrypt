@@ -22,7 +22,6 @@ void print_help(const string& program_name)
 int main(int argc, char** argv)
 {
     try {
-
         const char* const   short_options = "hi:o:p:ib";
         const struct option long_options[]
             = {{"help", 0, nullptr, 'h'},     {"output", 1, nullptr, 'o'}, {"input", 1, nullptr, 'i'},
@@ -86,20 +85,10 @@ int main(int argc, char** argv)
 
         const parts_t& parts = unpacker.parts();
 
-        /*
-        for(size_t i = 0; i < parts.size(); ++i) {
-            cout << parts[i] << endl;
+        for (size_t i = 0; i < parts.size(); ++i) {
+            cout << "Using temporary part file: " << parts[i] << endl;
             pdf.attach(parts[i]);
         }
-        */
-
-        pdf.attach("/tmp/epdfcryptHycygV/10.jpg");
-        /*
-        pdf.attach("/tmp/epdfcryptHycygV/olderr.pdf");
-        pdf.attach("/tmp/epdfcryptHycygV/part0.bin");
-        pdf.attach("/tmp/epdfcryptHycygV/part1.bin");
-        pdf.attach("/tmp/epdfcryptHycygV/part2.bin");
-        */
 
         cout << "PDF file size: " << pdf.size() << " bytes." << endl;
 

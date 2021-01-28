@@ -8,7 +8,6 @@ using namespace std;
 int main()
 {
     try {
-
         file_mime_stream stream("in.eml");
         mime_unpacker    unpacker(stream);
 
