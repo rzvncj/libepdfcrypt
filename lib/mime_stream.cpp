@@ -37,6 +37,7 @@ void mime_stream::write(const std::string& buffer)
 
         if (ret < 0)
             throw std::runtime_error(std::string("write error: ") + g_strerror(errno));
+
         written += ret;
 
     } while (written < total);
