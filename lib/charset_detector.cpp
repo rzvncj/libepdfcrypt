@@ -3,7 +3,7 @@
 
 namespace epdfcrypt {
 
-charset_detector::charset_detector() : detector_(0)
+charset_detector::charset_detector()
 {
     UErrorCode status = U_ZERO_ERROR;
     detector_         = ucsdet_open(&status);

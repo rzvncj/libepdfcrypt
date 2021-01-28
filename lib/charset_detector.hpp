@@ -19,7 +19,7 @@ public:
     std::string charset(const std::string& text);
 
 private:
-    UCharsetDetector* detector_;
+    UCharsetDetector* detector_ {nullptr};
 };
 
 }
