@@ -13,8 +13,8 @@ public:
     enum seek_pos { SET, CUR, END };
 
 public:
-    mime_stream();
-    virtual ~mime_stream();
+    mime_stream()          = default;
+    virtual ~mime_stream() = default;
 
     mime_stream(const mime_stream&) = delete;
     mime_stream& operator=(const mime_stream&) = delete;
@@ -32,7 +32,7 @@ public:
     std::string content() const;
 
 protected:
-    GMimeStream* stream_;
+    GMimeStream* stream_ {nullptr};
 };
 
 class mime_stream_filter : private safe_epdf_object {

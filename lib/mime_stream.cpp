@@ -4,14 +4,6 @@
 
 namespace epdfcrypt {
 
-mime_stream::mime_stream() : stream_(NULL)
-{
-}
-
-mime_stream::~mime_stream()
-{
-}
-
 GMimeStream* mime_stream::stream() const
 {
     return stream_;
