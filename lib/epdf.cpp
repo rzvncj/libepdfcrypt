@@ -171,7 +171,7 @@ std::string epdf::charset_setup(const std::string& icu_charset, const std::strin
     if (icu_charset == "UTF-8") {
         HPDF_UseUTFEncodings(document_);
         const char* font_name = HPDF_LoadTTFontFromFile(document_, utf8_font_filename_.c_str(),
-                                                        (embed_utf8_font_ ? HPDF_TRUE : HPDF_FALSE));
+                                                        embed_utf8_font_ ? HPDF_TRUE : HPDF_FALSE);
 
         font_ = HPDF_GetFont(document_, font_name, "UTF-8");
 
@@ -234,7 +234,7 @@ std::string epdf::charset_setup(const std::string& icu_charset, const std::strin
         HPDF_UseUTFEncodings(document_);
 
         const char* font_name = HPDF_LoadTTFontFromFile(document_, utf8_font_filename_.c_str(),
-                                                        (embed_utf8_font_ ? HPDF_TRUE : HPDF_FALSE));
+                                                        embed_utf8_font_ ? HPDF_TRUE : HPDF_FALSE);
 
         font_ = HPDF_GetFont(document_, font_name, "UTF-8");
         return boost::locale::conv::to_utf<char>(text, icu_charset);
