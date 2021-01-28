@@ -22,7 +22,7 @@ public:
     GMimeMessage* parse() const;
 
 protected:
-    GMimeParser* parser_;
+    GMimeParser* parser_ {nullptr};
 };
 
 }
