@@ -24,17 +24,17 @@ std::string charset_detector::charset(const std::string& text)
     ucsdet_setText(detector_, text.c_str(), static_cast<int32_t>(text.length()), &status);
 
     if (U_FAILURE(status))
-        return std::string();
+        return {};
 
     const UCharsetMatch* match = ucsdet_detect(detector_, &status);
 
     if (U_FAILURE(status) || !match)
-        return std::string();
+        return {};
 
     const char* detected_charset = ucsdet_getName(match, &status);
 
     if (!detected_charset)
-        return std::string();
+        return {};
 
     return detected_charset;
 }
