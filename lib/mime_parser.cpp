@@ -17,7 +17,7 @@ mime_parser::~mime_parser()
 
 GMimeMessage* mime_parser::parse() const
 {
-    GMimeMessage* message = g_mime_parser_construct_message(parser_);
+    GMimeMessage* message = g_mime_parser_construct_message(parser_, NULL);
 
     if (!GMIME_IS_MESSAGE(message))
         throw std::runtime_error("parse error: invalid email stream");

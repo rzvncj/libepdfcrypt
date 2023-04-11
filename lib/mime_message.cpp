@@ -46,7 +46,7 @@ std::string mime_message::body_text() const
         memory_mime_stream output;
         GMimePart*         mime_part = reinterpret_cast<GMimePart*>(part);
 
-        GMimeDataWrapper* content = g_mime_part_get_content_object(mime_part);
+        GMimeDataWrapper* content = g_mime_part_get_content(mime_part);
         g_mime_data_wrapper_write_to_stream(content, output.stream());
         g_mime_stream_flush(output.stream());
 

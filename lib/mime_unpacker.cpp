@@ -92,7 +92,7 @@ void mime_unpacker::extract_foreach_callback(GMimeObject*, GMimeObject* part, gp
 
         file_mime_stream output(path);
 
-        GMimeDataWrapper* content = g_mime_part_get_content_object(mime_part);
+        GMimeDataWrapper* content = g_mime_part_get_content(mime_part);
         g_mime_data_wrapper_write_to_stream(content, output.stream());
         g_mime_stream_flush(output.stream());
 

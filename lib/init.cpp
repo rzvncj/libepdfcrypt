@@ -6,7 +6,7 @@ namespace epdfcrypt {
 
 sys_initializer::sys_initializer()
 {
-    g_mime_init(0);
+    g_mime_init();
 }
 
 } // namespace epdfcrypt
