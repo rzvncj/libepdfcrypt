@@ -7,7 +7,7 @@ LT_INIT
 
 AC_PROG_CXX
 AC_LANG([C++])
-AX_CXX_COMPILE_STDCXX_14([noext], [mandatory])
+AX_CXX_COMPILE_STDCXX_17([noext], [mandatory])
 
 AM_INIT_AUTOMAKE
 AC_PROG_INSTALL
